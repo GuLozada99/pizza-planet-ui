@@ -57,95 +57,45 @@
     <div class="container">
       <!-- Notification Area -->
 
-      <div id="order-alert" class="alert alert-success" role="alert">
-        <h4 class="alert-heading">Great!</h4>
-        <p>Your order was accepted successfully</p>
-      </div>
-      <div id="client-alert" class="alert alert-danger" role="alert">
-        <h4 class="alert-heading">Sorry!</h4>
-        <p>There are no clients with this dni</p>
-      </div>
-
       <div class="jumbotron">
-        <h2 class="text-center">Build your own pizza!</h2>
-
-        <form id="order-form">
-          <!-- CLIENT DATA -->
-
-          <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Name: </label>
-            <div class="col-sm-10">
-              <input required name="name" type="text" class="form-control" placeholder="Name" />
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <label class="col-sm-2 col-form-label">DNI: </label>
-            <div class="col-sm-8 col-8">
-              <input required name="dni" maxlength="10" type="text" class="form-control" placeholder="DNI" />
-            </div>
-                <div class="col-sm-2">
-            <button type="button" id="client-search" class="btn btn-block btn-success">Search</button>
-          </div>
-          </div>
-
-          <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Address: </label>
-            <div class="col-sm-10">
-              <input required name="address" type="text" class="form-control" placeholder="Address" />
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Phone #: </label>
-            <div class="col-sm-10">
-              <input required name="phone" type="text" class="form-control" placeholder="Phone" />
-            </div>
-          </div>
-
-          <hr />
-
-          <!-- SIZE AND INGREDIENTS -->
+        <h2 class="text-center">Report of important information</h2>
 
           <table class="table bg-white table-bordered">
             <thead class="thead-dark">
               <tr>
-                <th class="w-20">Choose a size</th>
-                <th class="w-40">Choose your ingredients</th>
-                <th class="w-40">Choose your drink</th>
+                <th class="w-40">Revenue by month</th>
+                <th class="w-30">Ingredients by most requests</th>
+                <th class="w-30">Clients by most expenses</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>
-                  <table id="sizes">
-                    <template id="sizes-template">
-                      <div class="form-check">
-                        <input value="{{_id}}" required name="size" class="form-check-input" type="radio" />
-                        <label class="form-check-label" for="exampleRadios1"> {{name}} - ${{price}} </label>
-                      </div>
+                  <table id="revenue-month">
+                    <template id="revenue-month-template">
+                        <ul class="text-capitalize">
+                          <li>{{month_name}}, {{ year }}: ${{revenue}}</li>
+                        </ul>
                     </template>
                     <tbody></tbody>
                   </table>
                 </td>
                 <td>
-                  <table id="ingredients">
-                    <template id="ingredients-template">
-                      <div class="form-check">
-                        <input name="ingredients" value="{{_id}}" class="form-check-input" type="checkbox" />
-                        <label class="form-check-label" for="defaultCheck1"> {{name}} - ${{price}} </label>
-                      </div>
+                  <table id="ingredients-request" class="table-striped">
+                    <template id="ingredients-request-template">
+                        <ul class="text-capitalize">
+                          <li>{{name}} - Price: ${{price}} - Requests: {{ requests }}</li>
+                        </ul>
                     </template>
                     <tbody></tbody>
                   </table>
                 </td>
                 <td>
-                  <table id="beverages">
-                    <template id="beverages-template">
-                      <div class="form-check">
-                        <input name="beverages" value="{{_id}}" class="form-check-input" type="checkbox" />
-                        <label class="form-check-label" for="defaultCheck1"> {{name}} - ${{price}} </label>
-                      </div>
+                  <table id="clients-expenses">
+                    <template id="clients-expenses-template">
+                        <ul class="text-capitalize">
+                          <li>{{name}} - Expenses: {{ expenses }}</li>
+                        </ul>
                     </template>
                     <tbody></tbody>
                   </table>
@@ -153,13 +103,6 @@
               </tr>
             </tbody>
           </table>
-
-          <!-- ORDER BUTTON -->
-
-          <div class="text-center">
-            <button type="submit" class="btn btn-warning btn-lg">Order</button>
-          </div>
-        </form>
       </div>
     </div>
 
@@ -187,6 +130,6 @@
       crossorigin="anonymous"
     ></script>
 
-    <script src="js/index.js"></script>
+    <script src="/js/report/report.js"></script>
   </body>
 </html>
