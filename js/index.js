@@ -2,7 +2,7 @@
  * POST the order on /pizza
  * @param order
  */
-
+let first = true;
 function postOrder(order) {
 
     fetch('http://127.0.0.1:5000/order/', {
@@ -26,6 +26,17 @@ orderForm.submit(event => {
 
     let order = getOrderData();
     postOrder(order);
+
+    setFieldsDissabled(false)
+
+    event.preventDefault();
+    event.currentTarget.reset();
+});
+
+let searchClientButton = $("#client-search");
+searchClientButton.click(event => {
+    let dni = $("input[name='dni']").val()
+    fetchClient(dni)
 
     event.preventDefault();
     event.currentTarget.reset();
@@ -64,6 +75,12 @@ function showNotification() {
     setTimeout(() => orderAlert.toggle(), 5000);
 }
 
+function showClientNotification() {
+    let orderAlert = $("#client-alert");
+    orderAlert.toggle();
+    setTimeout(() => orderAlert.toggle(), 5000);
+}
+
 
 // Gather information in a dynamic way
 
@@ -95,6 +112,38 @@ function fetchOrderSizes() {
             let table = $("#sizes tbody");
             table.append(rows);
         });
+}
+
+function fetchClient(dni) {
+    fetch(`http://127.0.0.1:5000/client/dni/${dni}`)
+        .then(response => response.json())
+        .then(client => {
+            let name = $("input[name='name']");
+            let dni = $("input[name='dni']");
+            let address = $("input[name='address']");
+            let phone = $("input[name='phone']");
+
+            if (Object.keys(client).length !== 0){
+                name.val(client['name']);
+                dni.val(client['dni']);
+                address.val(client['address']);
+                phone.val(client['phone']);
+                setFieldsDissabled(true);
+            } else {
+                setFieldsDissabled(false);
+                name.val('');
+                dni.val('');
+                address.val('');
+                phone.val('');
+                showClientNotification();
+            }
+        });
+}
+
+function setFieldsDissabled(state) {
+    $("input[name='name']").prop('disabled', state);
+    $("input[name='address']").prop('disabled', state);
+    $("input[name='phone']").prop('disabled', state);
 }
 
 function createIngredientTemplate(ingredient) {

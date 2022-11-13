@@ -6,6 +6,10 @@
   display: none;
 }
 
+#client-alert {
+  display: none;
+}
+
 #ingredient-alert {
   display: none;
 }
