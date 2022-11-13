@@ -14,7 +14,7 @@
     />
     <link rel="stylesheet" href="/css/styles.css" />
 
-    <title>L'ultima Cena Pizzeria! - Beverages</title>
+    <title>L'ultima Cena Pizzeria! - Create order</title>
   </head>
 
   <body>
@@ -52,49 +52,59 @@
       </nav>
     </header>
 
-    <!-- TABLE -->
+    <!-- FORM PART -->
 
     <div class="container">
+      <!-- Notification Area -->
+
       <div class="jumbotron">
-        <div id="beverage-list">
-          <h2 class="text-center">Beverages</h2>
-          <table id="beverages" class="table bg-white table-bordered table-hover">
+        <h2 class="text-center">Report of important information</h2>
+
+          <table class="table bg-white table-bordered">
             <thead class="thead-dark">
-              <tr class="d-flex">
-                <th class="col-2 text-center">ID</th>
-                <th class="col-4 text-center">Name</th>
-                <th class="col-3 text-center">Price</th>
-                <th class="col-3 text-center">Actions</th>
+              <tr>
+                <th class="w-40">Revenue by month</th>
+                <th class="w-30">Ingredients by most requests</th>
+                <th class="w-30">Clients by most expenses</th>
               </tr>
             </thead>
-            <tbody></tbody>
+            <tbody>
+              <tr>
+                <td>
+                  <table id="revenue-month">
+                    <template id="revenue-month-template">
+                        <ul class="text-capitalize">
+                          <li>{{month_name}}, {{ year }}: ${{revenue}}</li>
+                        </ul>
+                    </template>
+                    <tbody></tbody>
+                  </table>
+                </td>
+                <td>
+                  <table id="ingredients-request" class="table-striped">
+                    <template id="ingredients-request-template">
+                        <ul class="text-capitalize">
+                          <li>{{name}} - Price: ${{price}} - Requests: {{ requests }}</li>
+                        </ul>
+                    </template>
+                    <tbody></tbody>
+                  </table>
+                </td>
+                <td>
+                  <table id="clients-expenses">
+                    <template id="clients-expenses-template">
+                        <ul class="text-capitalize">
+                          <li>{{name}} - Expenses: ${{ expenses }}</li>
+                        </ul>
+                    </template>
+                    <tbody></tbody>
+                  </table>
+              </td>
+              </tr>
+            </tbody>
           </table>
-        </div>
-
-        <div class="text-center">
-          <a class="btn btn-warning btn-lg add-beverage" href="/app/beverage/add-beverage.html"
-            >Add New Beverage</a
-          >
-        </div>
       </div>
     </div>
-
-    <template id="beverage-item-template">
-      <tr class="d-flex">
-        <td class="col-2 text-center">{{_id}}</td>
-        <td class="col-4">{{name}}</td>
-        <td class="col-3">${{price}}</td>
-        <td class="col-3 text-center">
-          <div class="text-center">
-            <a
-              class="btn btn-success btn-sm update-beverage"
-              href="/app/beverage/update-beverage.html?_id={{_id}}"
-              >Update</a
-            >
-          </div>
-        </td>
-      </tr>
-    </template>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -113,12 +123,13 @@
       integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
       crossorigin="anonymous"
     ></script>
+
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.0/mustache.js"
       integrity="sha256-ILqMXUXPam8LdBwbq5W6r1m0NxeP8ydLFqrYN+bMCeI="
       crossorigin="anonymous"
     ></script>
 
-    <script src="/js/beverages/beverage.js"></script>
+    <script src="/js/report/report.js"></script>
   </body>
 </html>
